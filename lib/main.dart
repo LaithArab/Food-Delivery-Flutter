@@ -10,6 +10,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: HomePage());
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Aklak - Food Delivery',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: HomePage(),
+    );
   }
 }
