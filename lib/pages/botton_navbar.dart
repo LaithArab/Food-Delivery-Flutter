@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/pages/favorites_page.dart';
 import 'package:food_delivery/pages/home_page.dart';
 
 class BottomNavBarPage extends StatefulWidget {
@@ -17,7 +18,7 @@ class _MyWidgetState extends State<BottomNavBarPage> {
   }
 
   List<Widget> bodyOption = const [
-    Center(child: Text('Your are in foavorite')),
+    FavoritesPage(),
     HomePage(),
     Center(child: Text('You are in account')),
   ];
