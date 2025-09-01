@@ -2,7 +2,7 @@ class FoodItem {
   final String name;
   final double price;
   final String imgUrl;
-  final bool? isFavorite;
+  final bool isFavorite;
 
   FoodItem({
     required this.name,
@@ -10,6 +10,20 @@ class FoodItem {
     required this.imgUrl,
     this.isFavorite = false,
   });
+
+  FoodItem copyWith({
+    String? name,
+    double? price,
+    String? imgUrl,
+    bool? isFavorite,
+  }) {
+    return FoodItem(
+      name: name ?? this.name,
+      price: price ?? this.price,
+      imgUrl: imgUrl ?? this.imgUrl,
+      isFavorite: isFavorite ?? this.isFavorite,
+    );
+  }
 }
 
 List<FoodItem> food = [
@@ -18,7 +32,6 @@ List<FoodItem> food = [
     price: 15,
     imgUrl:
         'https://images.icon-icons.com/2852/PNG/512/burger_fast_food_icon_181517.png',
-    isFavorite: true,
   ),
   FoodItem(
     name: "Chicken Burger",
@@ -42,7 +55,6 @@ List<FoodItem> food = [
     price: 7.5,
     imgUrl:
         'https://images.icon-icons.com/1646/PNG/96/recipepizzaicon_109877.png',
-    isFavorite: true,
   ),
   FoodItem(
     name: "Chicken Pizza",

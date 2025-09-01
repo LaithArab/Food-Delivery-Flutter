@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/pages/botton_navbar.dart';
-import 'package:food_delivery/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
