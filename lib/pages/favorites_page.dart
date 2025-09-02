@@ -14,6 +14,23 @@ class _FavoritesPageState extends State<FavoritesPage> {
     final favoriteFood = food
         .where((foodItem) => foodItem.isFavorite == true)
         .toList();
+    if (favoriteFood.isEmpty) {
+      return Center(
+        child: Column(
+          children: [
+            Image.asset(
+              'assets/images/haha.png',
+              fit: BoxFit.cover,
+              height: 300,
+            ),
+            const Text(
+              "No Favorite Items Found!",
+              style: TextStyle(fontSize: 22),
+            ),
+          ],
+        ),
+      );
+    }
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: ListView.builder(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/pages/account_page.dart';
 import 'package:food_delivery/pages/favorites_page.dart';
 import 'package:food_delivery/pages/home_page.dart';
 
@@ -17,11 +18,7 @@ class _MyWidgetState extends State<BottomNavBarPage> {
     });
   }
 
-  List<Widget> bodyOption = const [
-    FavoritesPage(),
-    HomePage(),
-    Center(child: Text('You are in account')),
-  ];
+  List<Widget> bodyOption = const [FavoritesPage(), HomePage(), AccountPage()];
 
   @override
   Widget build(BuildContext context) {
