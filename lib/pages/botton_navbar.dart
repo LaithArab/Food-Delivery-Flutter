@@ -24,12 +24,8 @@ class _MyWidgetState extends State<BottomNavBarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: Colors.black,
-        backgroundColor: Colors.grey[100],
-        elevation: 0,
         title: const Row(children: [SizedBox(width: 100), Text('Aklak')]),
       ),
-      backgroundColor: Colors.grey[100],
       drawer: const Drawer(child: Center(child: Text("I'm in the dewer"))),
 
       bottomNavigationBar: BottomNavigationBar(
@@ -43,7 +39,7 @@ class _MyWidgetState extends State<BottomNavBarPage> {
         ],
         currentIndex: selectedIndex,
         onTap: onItemTapped,
-        selectedItemColor: Colors.deepOrange,
+        selectedItemColor: Theme.of(context).primaryColor,
       ),
       body: bodyOption[selectedIndex],
     );

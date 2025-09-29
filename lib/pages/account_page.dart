@@ -3,36 +3,35 @@ import 'package:flutter/material.dart';
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
 
-  Widget orderVoucherITem({required String name, required int number}) {
+  Widget orderVoucherITem(
+    BuildContext context, {
+    required String name,
+    required int number,
+  }) {
     return Column(
       children: [
         Text(
           number.toString(),
-          style: TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.w600,
-            color: Colors.deepOrange,
+          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+            color: Theme.of(context).primaryColor,
           ),
         ),
-        Text("$name", style: TextStyle(fontSize: 18)),
+        Text("$name", style: Theme.of(context).textTheme.titleMedium),
       ],
     );
   }
 
-  Widget itemTappedTile({
+  Widget itemTappedTile(
+    BuildContext context, {
     required String title,
     String? subtitle,
     required IconData icon,
   }) {
     return ListTile(
-      leading: Icon(icon, size: 35, color: Colors.deepOrange),
+      leading: Icon(icon, size: 35),
       title: Text(title),
       subtitle: subtitle != null ? Text(subtitle) : null,
-      trailing: const Icon(
-        Icons.chevron_right,
-        color: Colors.deepOrange,
-        size: 25,
-      ),
+      trailing: const Icon(Icons.chevron_right, size: 25),
       onTap: () => print('$title clicked!'),
     );
   }
@@ -53,28 +52,35 @@ class AccountPage extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16.0),
-          const Text(
+          Text(
             "Laith Arab",
-            style: TextStyle(fontSize: 32, fontWeight: FontWeight.w600),
+            style: Theme.of(
+              context,
+            ).textTheme.headlineMedium!.copyWith(fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 16.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              orderVoucherITem(name: "Order", number: 50),
-              orderVoucherITem(name: "Vouchers", number: 10),
+              orderVoucherITem(context, name: "Order", number: 50),
+              orderVoucherITem(context, name: "Vouchers", number: 10),
             ],
           ),
           const SizedBox(height: 24.0),
-          Divider(thickness: 2, indent: 20, endIndent: 20),
+          Divider(),
 
-          itemTappedTile(title: "Past Order", icon: Icons.shopping_cart),
-          Divider(thickness: 2, indent: 20, endIndent: 20),
           itemTappedTile(
+            context,
+            title: "Past Order",
+            icon: Icons.shopping_cart,
+          ),
+          Divider(),
+          itemTappedTile(
+            context,
             title: "Acailable Vouchers",
             icon: Icons.card_giftcard,
           ),
-          Divider(thickness: 2, indent: 20, endIndent: 20),
+          Divider(),
         ],
       ),
     );

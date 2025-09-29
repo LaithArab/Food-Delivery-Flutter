@@ -61,7 +61,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
-                          color: Colors.deepOrange,
+                          color: Theme.of(context).primaryColor,
                         ),
                       ),
                     ],
@@ -79,7 +79,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                   },
                   icon: Icon(
                     Icons.favorite,
-                    color: Colors.deepOrange,
+                    color: Theme.of(context).primaryColor,
                     size: 30,
                   ),
                 ),
