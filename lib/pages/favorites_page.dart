@@ -11,9 +11,12 @@ class FavoritesPage extends StatefulWidget {
 class _FavoritesPageState extends State<FavoritesPage> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final favoriteFood = food
         .where((foodItem) => foodItem.isFavorite == true)
         .toList();
+    final isLandScape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     if (favoriteFood.isEmpty) {
       return Center(
         child: Column(
@@ -21,11 +24,11 @@ class _FavoritesPageState extends State<FavoritesPage> {
             Image.asset(
               'assets/images/haha.png',
               fit: BoxFit.cover,
-              height: 300,
+              height: isLandScape ? size.height * 0.5 : size.height * 0.3,
             ),
-            const Text(
+            Text(
               "No Favorite Items Found!",
-              style: TextStyle(fontSize: 22),
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
           ],
         ),
@@ -43,8 +46,12 @@ class _FavoritesPageState extends State<FavoritesPage> {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                Image.network(favoriteFood[index].imgUrl, height: 70),
-                SizedBox(width: 8),
+                Image.network(
+                  favoriteFood[index].imgUrl,
+                  height: isLandScape ? size.height * 0.2 : size.height * 0.1,
+                  width: isLandScape ? size.width * 0.2 : size.height * 0.2,
+                ),
+                SizedBox(width: size.width * 0.03),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,7 +87,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                   icon: Icon(
                     Icons.favorite,
                     color: Theme.of(context).primaryColor,
-                    size: 30,
+                    size: isLandScape ? size.height * 0.1 : size.height * 0.035,
                   ),
                 ),
               ],

@@ -34,13 +34,13 @@ List<FoodItem> food = [
         'https://images.icon-icons.com/2852/PNG/512/burger_fast_food_icon_181517.png',
   ),
   FoodItem(
-    name: "Chicken Burger",
+    name: "Chicken ",
     price: 13,
     imgUrl:
         'https://images.icon-icons.com/2419/PNG/512/burger_food_icon_146845.png',
   ),
   FoodItem(
-    name: "Margreta Burger",
+    name: "Margreta ",
     price: 10,
     imgUrl: 'https://images.icon-icons.com/1361/PNG/96/food-icons01_89023.png',
   ),

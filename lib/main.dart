@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:food_delivery/pages/botton_navbar.dart';
 
 void main() {
@@ -20,8 +21,13 @@ class MyApp extends StatelessWidget {
           foregroundColor: Colors.black,
           elevation: 0,
         ),
-        dividerTheme: DividerThemeData(thickness: 2, indent: 20, endIndent: 20),
+        dividerTheme: const DividerThemeData(
+          thickness: 2,
+          indent: 20,
+          endIndent: 20,
+        ),
         listTileTheme: ListTileThemeData(iconColor: Colors.deepOrange),
+        fontFamily: 'OPenSans',
       ),
 
       title: 'Aklak - Food Delivery',

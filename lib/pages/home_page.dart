@@ -7,7 +7,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textScale = MediaQuery.textScalerOf(context);
     final size = MediaQuery.of(context).size;
+    final isLandScape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: SingleChildScrollView(
@@ -17,7 +20,7 @@ class HomePage extends StatelessWidget {
               borderRadius: BorderRadius.circular(24.0),
               child: Image.asset(
                 'assets/images/lala.png',
-                height: size.height * 0.30,
+                height: !isLandScape ? size.height * 0.3 : size.height * 0.7,
                 fit: BoxFit.contain,
               ),
             ),
@@ -27,10 +30,10 @@ class HomePage extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: food.length,
               itemBuilder: (context, index) => FoodGridItem(foodIndex: index),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 20,
-                crossAxisSpacing: 10,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: isLandScape ? 4 : 2,
+                mainAxisSpacing: size.height * 0.02,
+                crossAxisSpacing: size.height * 0.02,
               ),
             ),
           ],

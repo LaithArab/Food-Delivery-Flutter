@@ -27,8 +27,9 @@ class AccountPage extends StatelessWidget {
     String? subtitle,
     required IconData icon,
   }) {
+    final size = MediaQuery.of(context).size;
     return ListTile(
-      leading: Icon(icon, size: 35),
+      leading: Icon(icon, size: size.height * 0.03),
       title: Text(title),
       subtitle: subtitle != null ? Text(subtitle) : null,
       trailing: const Icon(Icons.chevron_right, size: 25),
@@ -38,11 +39,13 @@ class AccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Center(
       child: Column(
         children: [
           Container(
-            height: 250,
+            height: size.height * 0.3,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
@@ -51,14 +54,14 @@ class AccountPage extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 16.0),
+          SizedBox(height: size.height * 0.02),
           Text(
             "Laith Arab",
             style: Theme.of(
               context,
             ).textTheme.headlineMedium!.copyWith(fontWeight: FontWeight.w600),
           ),
-          const SizedBox(height: 16.0),
+          SizedBox(height: size.height * 0.02),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -66,7 +69,7 @@ class AccountPage extends StatelessWidget {
               orderVoucherITem(context, name: "Vouchers", number: 10),
             ],
           ),
-          const SizedBox(height: 24.0),
+          SizedBox(height: size.height * 0.03),
           Divider(),
 
           itemTappedTile(

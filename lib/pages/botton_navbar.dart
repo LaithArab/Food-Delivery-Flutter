@@ -41,7 +41,7 @@ class _MyWidgetState extends State<BottomNavBarPage> {
         onTap: onItemTapped,
         selectedItemColor: Theme.of(context).primaryColor,
       ),
-      body: bodyOption[selectedIndex],
+      body: SafeArea(child: bodyOption[selectedIndex]),
     );
   }
 }
