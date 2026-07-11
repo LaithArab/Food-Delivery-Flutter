@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:food_delivery/pages/botton_navbar.dart';
+import 'package:food_delivery/pages/det_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,7 +31,10 @@ class MyApp extends StatelessWidget {
       ),
 
       title: 'Aklak - Food Delivery',
-      home: BottomNavBarPage(),
+      routes: {
+        '/': (context) => const BottomNavBarPage(),
+        FoodDetailsPage.source: (context) => const FoodDetailsPage(),
+      },
     );
   }
 }

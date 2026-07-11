@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:food_delivery/pages/account_page.dart';
 import 'package:food_delivery/pages/favorites_page.dart';
@@ -22,13 +24,13 @@ class _MyWidgetState extends State<BottomNavBarPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    final PreferredSizeWidget? appBar;
+    late final bottomNavBar;
+    if (Platform.isAndroid) {
+      appBar = AppBar(
         title: const Row(children: [SizedBox(width: 100), Text('Aklak')]),
-      ),
-      drawer: const Drawer(child: Center(child: Text("I'm in the dewer"))),
-
-      bottomNavigationBar: BottomNavigationBar(
+      );
+      bottomNavBar = BottomNavigationBar(
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
@@ -40,7 +42,29 @@ class _MyWidgetState extends State<BottomNavBarPage> {
         currentIndex: selectedIndex,
         onTap: onItemTapped,
         selectedItemColor: Theme.of(context).primaryColor,
-      ),
+      );
+    } else if (!Platform.isIOS) {
+      appBar = CupertinoNavigationBar(middle: Text("Aklak"));
+      bottomNavBar = CupertinoTabBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Favorite',
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Account'),
+        ],
+        currentIndex: selectedIndex,
+        onTap: onItemTapped,
+        activeColor: Theme.of(context).primaryColor,
+      );
+    } else
+      appBar = null;
+    return Scaffold(
+      appBar: appBar,
+      drawer: const Drawer(child: Center(child: Text("I'm in the dewer"))),
+
+      bottomNavigationBar: bottomNavBar,
       body: SafeArea(child: bodyOption[selectedIndex]),
     );
   }

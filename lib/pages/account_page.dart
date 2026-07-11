@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/utilites/app_assets.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({super.key});
@@ -16,7 +17,7 @@ class AccountPage extends StatelessWidget {
             color: Theme.of(context).primaryColor,
           ),
         ),
-        Text("$name", style: Theme.of(context).textTheme.titleMedium),
+        Text(name, style: Theme.of(context).textTheme.titleMedium),
       ],
     );
   }
@@ -57,7 +58,7 @@ class AccountPage extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         image: DecorationImage(
-          image: AssetImage('assets/images/laithPhoto.jpg'),
+          image: AssetImage(AppAssets.photo),
           fit: BoxFit.cover,
         ),
       ),
@@ -117,20 +118,20 @@ class AccountPage extends StatelessWidget {
             ),
           ],
           SizedBox(height: size.height * 0.03),
-          Divider(),
+          const Divider(),
 
           itemTappedTile(
             context,
             title: "Past Order",
             icon: Icons.shopping_cart,
           ),
-          Divider(),
+          const Divider(),
           itemTappedTile(
             context,
             title: "Acailable Vouchers",
             icon: Icons.card_giftcard,
           ),
-          Divider(),
+          const Divider(),
         ],
       ),
     );
