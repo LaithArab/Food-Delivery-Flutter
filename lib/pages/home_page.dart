@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool isCategorySelected = false;
   late List<FoodItem> filteredFood;
 
   void initState() {
@@ -43,7 +44,7 @@ class _HomePageState extends State<HomePage> {
 
             SizedBox(height: size.height * 0.03),
             SizedBox(
-              height: size.height * 0.16,
+              height: size.height * 0.2,
 
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -54,14 +55,26 @@ class _HomePageState extends State<HomePage> {
                     child: InkWell(
                       onTap: () {
                         setState(() {
-                          categorychosenId = categories[index].id;
-                          filteredFood = food
-                              .where((item) => categorychosenId == item.id)
-                              .toList();
+                          if (categorychosenId == categories[index].id ||
+                              !isCategorySelected)
+                            isCategorySelected = !isCategorySelected;
+
+                          if (isCategorySelected) {
+                            categorychosenId = categories[index].id;
+                            filteredFood = food
+                                .where(
+                                  (item) => categorychosenId == item.categoryId,
+                                )
+                                .toList();
+                          } else {
+                            categorychosenId = null;
+                            filteredFood = food;
+                          }
                         });
                       },
                       child: Container(
                         width: size.width * 0.25,
+                        padding: const EdgeInsets.all(12.0),
                         decoration: BoxDecoration(
                           color: categorychosenId == categories[index].id
                               ? Colors.deepOrange
@@ -69,8 +82,15 @@ class _HomePageState extends State<HomePage> {
                           borderRadius: BorderRadius.circular(12.0),
                         ),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Image.asset(categories[index].imageUrl),
+                            Image.asset(
+                              categories[index].imageUrl,
+                              height: size.height * 0.07,
+                              width: size.height * 0.07,
+                              fit: BoxFit.contain,
+                            ),
+                            const SizedBox(height: 8.0),
                             Text(
                               '${categories[index].title}',
                               style:
@@ -98,22 +118,34 @@ class _HomePageState extends State<HomePage> {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: filteredFood.length,
-              itemBuilder: (context, index) => InkWell(
-                onTap: () {
-                  Navigator.of(context)
-                      .pushNamed(
-                        FoodDetailsPage.source,
-                        arguments: FoodDetArgs(foodIndex: index),
-                      )
-                      .then((result) {
-                        setState(() {});
-                        debugPrint(
-                          'Returned from FoodDetailsPage with result: $result',
-                        );
-                      });
-                },
-                child: FoodGridItem(foodIndex: index),
-              ),
+              itemBuilder: (context, index) {
+                return InkWell(
+                  onTap: () {
+                    final targetFoodItem = food.firstWhere(
+                      (item) => item.id == filteredFood[index].id,
+                    );
+                    final actualFoodIndex = food.indexOf(targetFoodItem);
+
+                    Navigator.of(context)
+                        .pushNamed(
+                          FoodDetailsPage.source,
+                          arguments: FoodDetArgs(foodIndex: actualFoodIndex),
+                        )
+                        .then((result) {
+                          setState(() {});
+                          filteredFood = food;
+                          categorychosenId = null;
+                          debugPrint(
+                            'Returned from FoodDetailsPage with result: $result',
+                          );
+                        });
+                  },
+                  child: FoodGridItem(
+                    foodIndex: index,
+                    filteredFood: filteredFood,
+                  ),
+                );
+              },
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: isLandScape ? 4 : 2,
                 mainAxisSpacing: size.height * 0.02,

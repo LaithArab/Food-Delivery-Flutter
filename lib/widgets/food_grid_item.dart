@@ -4,10 +4,18 @@ import 'package:food_delivery/widgets/favorite_foodItem.dart';
 
 class FoodGridItem extends StatelessWidget {
   final int foodIndex;
-  const FoodGridItem({super.key, required this.foodIndex});
+  final List<FoodItem> filteredFood;
+
+  FoodGridItem({
+    super.key,
+    required this.foodIndex,
+    required this.filteredFood,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final actualFoodIndex = food.indexOf(filteredFood[foodIndex]);
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -23,7 +31,7 @@ class FoodGridItem extends StatelessWidget {
                   alignment: Alignment.topCenter,
                   children: [
                     Image.network(
-                      food[foodIndex].imgUrl,
+                      filteredFood[foodIndex].imgUrl,
                       height: constraints.maxHeight * 0.55,
                       fit: BoxFit.contain,
                     ),
@@ -31,7 +39,7 @@ class FoodGridItem extends StatelessWidget {
                       alignment: Alignment.topRight,
                       child: FavoriteFooditem(
                         constraints: constraints,
-                        foodIndex: foodIndex,
+                        foodIndex: actualFoodIndex,
                       ),
                     ),
                   ],
@@ -42,7 +50,7 @@ class FoodGridItem extends StatelessWidget {
                   height: constraints.maxHeight * 0.2,
                   child: FittedBox(
                     child: Text(
-                      food[foodIndex].name,
+                      filteredFood[foodIndex].name,
                       style: Theme.of(
                         context,
                       ).textTheme.titleLarge!.copyWith(fontFamily: 'OpenSans'),
@@ -54,7 +62,7 @@ class FoodGridItem extends StatelessWidget {
                   height: constraints.maxHeight * 0.15,
                   child: FittedBox(
                     child: Text(
-                      "\$${food[foodIndex].price}",
+                      "\$${filteredFood[foodIndex].price}",
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         color: Theme.of(context).primaryColor,

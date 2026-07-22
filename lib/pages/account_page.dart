@@ -47,7 +47,7 @@ class AccountPage extends StatelessWidget {
         Icons.chevron_right,
         size: isLandScape ? size.height * 0.13 : size.height * 0.05,
       ),
-      onTap: () => print('$title clicked!'),
+      onTap: () => debugPrint('$title clicked!'),
     );
   }
 
